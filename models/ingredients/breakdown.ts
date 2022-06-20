@@ -1,11 +1,11 @@
 import { recipesObject } from '../../data'
-import type { IngredientObject } from './types'
+import type { IngredientsAmount } from './types'
 import { addIngredients } from './add'
 
 export function breakdownIngredient(
   name: string,
   amount: number,
-  state: IngredientObject = {},
+  state: IngredientsAmount = {},
 ) {
   const recipe = recipesObject[name]
   if (recipe) {

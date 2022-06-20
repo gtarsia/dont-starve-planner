@@ -1,8 +1,8 @@
-import type { IngredientObject } from './types'
+import type { IngredientsAmount } from './types'
 
 export function addIngredients(
-  mutated: IngredientObject,
-  addition: IngredientObject,
+  mutated: IngredientsAmount,
+  addition: IngredientsAmount,
 ) {
   Object.entries(addition).map(([name, amount]) => {
     if (mutated[name] == null) {
