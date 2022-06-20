@@ -14,6 +14,7 @@ import { GoalIngredient } from './GoalIngredient'
 
 export function GoalComponent(props: { goal: Goal }) {
   const [ingredients, setIngredients] = useState<IngredientObject>({})
+  const [active, setActive] = useState<Record<string, boolean>>({})
   const [ready, setReady] = useState(false)
   useEffect(() => {
     setIngredients(getIngredients(props.goal.name))
@@ -32,10 +33,13 @@ export function GoalComponent(props: { goal: Goal }) {
   const total = useMemo(() => {
     const state = {}
     Object.entries(ingredients).forEach(([name, amount]) => {
+      if (active[name] === false) {
+        return
+      }
       breakdownIngredient(name, amount, state)
     })
     return Object.entries(state).sort(([a], [b]) => (a < b ? -1 : a === b ? 0 : 1))
-  }, [ingredients])
+  }, [ingredients, active])
   return <div>
     <h2>&apos;{props.goal.name}&apos; goal</h2>
     <div>
@@ -47,6 +51,9 @@ export function GoalComponent(props: { goal: Goal }) {
       key={name}
       name={name}
       amount={amount}
+      onChangeActive={(newActive) => {
+        setActive({ ...active, [name]: newActive })
+      }}
       onChangeAmount={(amount) => {
         const obj = { ...ingredients }
         obj[name] = amount
