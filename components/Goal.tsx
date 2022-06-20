@@ -23,13 +23,18 @@ export function GoalComponent(props: { goal: Goal }) {
       _setIngredients(props.goal.name, ingredients)
     }
   }, [ingredients])
-  const ingsArray = useMemo(() => Object.entries(ingredients), [ingredients])
+  const ingsArray = useMemo(() => {
+    const entries = Object.entries(ingredients)
+    entries.sort(([a], [b]) => (a < b ? -1 : a === b ? 0 : 1))
+    return entries
+  }, [ingredients])
   const total = useMemo(() => {
     const state = {}
     Object.entries(ingredients).forEach(([name, amount]) => {
       breakdownIngredient(name, amount, state)
     })
-    return JSON.stringify(state)
+    const result = Object.entries(state).sort(([a], [b]) => (a < b ? -1 : a === b ? 0 : 1))
+    return result.map(([name, amount]) => `${name} (${amount})`).join(', ')
   }, [ingredients])
   return <div>
     <h2>&apos;{props.goal.name}&apos; goal</h2>
