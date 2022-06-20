@@ -10,6 +10,7 @@ import {
 import { recipesObject } from '../data'
 import { IngredientForm } from './IngredientForm'
 import { CustomIngredientForm } from './CustomIngredientForm'
+import { GoalIngredient } from './GoalIngredient'
 
 export function GoalComponent(props: { goal: Goal }) {
   const [ingredients, setIngredients] = useState<IngredientObject>({})
@@ -33,8 +34,7 @@ export function GoalComponent(props: { goal: Goal }) {
     Object.entries(ingredients).forEach(([name, amount]) => {
       breakdownIngredient(name, amount, state)
     })
-    const result = Object.entries(state).sort(([a], [b]) => (a < b ? -1 : a === b ? 0 : 1))
-    return result.map(([name, amount]) => `${name} (${amount})`).join(', ')
+    return Object.entries(state).sort(([a], [b]) => (a < b ? -1 : a === b ? 0 : 1))
   }, [ingredients])
   return <div>
     <h2>&apos;{props.goal.name}&apos; goal</h2>
@@ -43,16 +43,26 @@ export function GoalComponent(props: { goal: Goal }) {
     </div>
     <IngredientForm onIngredientAdd={ing => setIngredients({ ...ingredients, [ing.name]: ing.amount }) }/>
     <CustomIngredientForm onIngredientAdd={ing => setIngredients({ ...ingredients, [ing.name]: ing.amount }) }/>
-    {ingsArray.map(([name, amount]) => <div key={name}>
-      {name} ({amount})
-      <button onClick={() => {
+    {ingsArray.map(([name, amount]) => <GoalIngredient
+      key={name}
+      name={name}
+      amount={amount}
+      onChangeAmount={(amount) => {
+        const obj = { ...ingredients }
+        obj[name] = amount
+        setIngredients(obj)
+      }}
+      onDelete={() => {
         const obj = { ...ingredients }
         delete obj[name]
         setIngredients(obj)
-      }}>X</button>
-    </div>)}
+      }}
+    />)}
     <div>
-      Total: {total}
+      <h2>Total</h2>
+      {total.map(([name, amount]) => <div key={name}>
+        <>{name} ({amount})</>
+      </div>)}
     </div>
   </div>
 }
