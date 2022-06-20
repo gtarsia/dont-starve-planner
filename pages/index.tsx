@@ -20,7 +20,7 @@ const Home: NextPage = () => {
     }
   }, [goals])
   return <div>
-    <h1>Don't Starve planner</h1>
+    <h1>Don&apos;t Starve planner</h1>
     <div>
       <button onClick={() => {
         const name = window.prompt("What's the name of the goal")

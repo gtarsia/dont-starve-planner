@@ -32,7 +32,7 @@ export function GoalComponent(props: { goal: Goal }) {
     return JSON.stringify(state)
   }, [ingredients])
   return <div>
-    <h2>'{props.goal.name}' goal</h2>
+    <h2>&apos;{props.goal.name}&apos; goal</h2>
     <div>
       <button onClick={() => deleteGoal(props.goal)}>Delete</button>
     </div>
