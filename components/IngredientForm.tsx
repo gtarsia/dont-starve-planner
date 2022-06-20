@@ -1,4 +1,4 @@
-import data from '../data/recipes.json'
+import data from '../data/recipes'
 import { useState } from 'react'
 
 const recipes = Object.entries(data)

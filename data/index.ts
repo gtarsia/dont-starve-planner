@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import data from './recipes.json'
+import data from './recipes'
 
 // "accomplishment_shrine": { "ingredients": [ [ "goldnugget", 10 ], [ "cutstone", 1 ], [ "gears", 6 ] ], "tab": "SCIENCE", "tech": "SCIENCE_TWO" },
 

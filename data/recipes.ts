@@ -1,4 +1,4 @@
-{
+export default {
 	"accomplishment_shrine": { "ingredients": [ [ "goldnugget", 10 ], [ "cutstone", 1 ], [ "gears", 6 ] ], "tab": "SCIENCE", "tech": "SCIENCE_TWO" },
 	"amulet": { "ingredients": [ [ "goldnugget", 3 ], [ "nightmarefuel", 2 ], [ "redgem", 1 ] ], "tab": "MAGIC", "tech": "MAGIC_TWO" },
   "armor_sanity": { "ingredients": [ [ "nightmarefuel", 5 ], [ "papyrus", 3 ] ], "tab": "MAGIC", "tech": "MAGIC_THREE" },
